@@ -14,6 +14,7 @@
 		537DB9731D62023800E90D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 537DB9721D62023800E90D41 /* Assets.xcassets */; };
 		537DB9761D62023800E90D41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 537DB9741D62023800E90D41 /* LaunchScreen.storyboard */; };
 		537DB9811D62023800E90D41 /* FacebookAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537DB9801D62023800E90D41 /* FacebookAppTests.swift */; };
+		539455FA1D6B5A2E00E5CE6F /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539455F91D6B5A2E00E5CE6F /* WebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		537DB97C1D62023800E90D41 /* FacebookAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		537DB9801D62023800E90D41 /* FacebookAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAppTests.swift; sourceTree = "<group>"; };
 		537DB9821D62023800E90D41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		539455F61D6B535800E5CE6F /* Tentacle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tentacle.framework; path = Carthage/Build/iOS/Tentacle.framework; sourceTree = "<group>"; };
+		539455F91D6B5A2E00E5CE6F /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				539455FA1D6B5A2E00E5CE6F /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +68,7 @@
 				537DB96A1D62023700E90D41 /* FacebookApp */,
 				537DB97F1D62023800E90D41 /* FacebookAppTests */,
 				537DB9691D62023700E90D41 /* Products */,
+				539455F51D6B535500E5CE6F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +104,15 @@
 			path = FacebookAppTests;
 			sourceTree = "<group>";
 		};
+		539455F51D6B535500E5CE6F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				539455F91D6B5A2E00E5CE6F /* WebImage.framework */,
+				539455F61D6B535800E5CE6F /* Tentacle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,6 +123,7 @@
 				537DB9641D62023700E90D41 /* Sources */,
 				537DB9651D62023700E90D41 /* Frameworks */,
 				537DB9661D62023700E90D41 /* Resources */,
+				539455F81D6B539400E5CE6F /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -197,6 +212,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		539455F81D6B539400E5CE6F /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		537DB9641D62023700E90D41 /* Sources */ = {
@@ -335,6 +370,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9ZB7R948L5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FacebookApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.FacebookApp;
@@ -348,6 +387,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9ZB7R948L5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FacebookApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.FacebookApp;

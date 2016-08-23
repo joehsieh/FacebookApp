@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebImage
 
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
@@ -42,18 +43,31 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var height: CGFloat  = 8 + 44 + 4 + 4 + 200 + 8 + 24 + 8 + 0.4 + 44
         let post = posts[indexPath.item]
-        let textRect = post.statusText.boundingRect(with: CGSize(width: self.view.frame.size.width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
-        height += textRect.height
-        return CGSize(width: view.frame.width, height: ceil(height))
+        let height = FeedCell.cellHeight(withText: post.statusText, width: self.view.frame.size.width, fontSize: 14)
+        return CGSize(width: view.frame.width, height: height)
     }
 }
 
 class FeedCell: UICollectionViewCell
 {
     static let cellIdentifier = NSStringFromClass(FeedCell.self)
+    static let imageHeight: CGFloat = 200.0
+    static let profileImageHeight: CGFloat = 44.0
+    static let imageSizeSting = "\(Int(UIScreen.main.bounds.size.width))x\(Int(imageHeight))"
+    static let profileImageSizeString = "\(Int(profileImageHeight))x\(Int(profileImageHeight))"
     
+    static func cellHeight(withText:String, width: CGFloat, fontSize: CGFloat) -> CGFloat{
+        var height: CGFloat  = 8 + profileImageHeight + 4 + 4 + imageHeight + 8 + 24 + 8 + 0.4 + 44
+        let textRect = withText.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
+        height += textRect.height
+        return ceil(height)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    // MARK: properties
     var post: Post? {
         didSet {
             
@@ -83,11 +97,29 @@ class FeedCell: UICollectionViewCell
             }
             
             if let profileImagename = post?.profileImageName {
-                profileImageView.image = UIImage(named: profileImagename)
+                profileImageView.sd_setImage(with: URL(string: "https://source.unsplash.com/random/\(FeedCell.profileImageSizeString)?a=\(profileImagename)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                    if error != nil {
+                        return
+                    }
+                    let transition = CATransition()
+                    transition.duration = 0.4;
+                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    transition.type = kCATransitionFade
+                    self.profileImageView.layer.add(transition, forKey: nil)
+                })
             }
             
-            if let statusImageName = post?.statusImageName {
-                statusImageView.image = UIImage(named: statusImageName)
+            if let identifier = post?.identifier {
+                statusImageView.sd_setImage(with: URL(string: "https://source.unsplash.com/random/\(FeedCell.imageSizeSting)?a=\(identifier)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                    if error != nil {
+                        return
+                    }
+                    let transition = CATransition()
+                    transition.duration = 0.4;
+                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    transition.type = kCATransitionFade
+                    self.statusImageView.layer.add(transition, forKey: nil)
+                })
             }
             
         }
@@ -125,7 +157,6 @@ class FeedCell: UICollectionViewCell
     
     let statusImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "test")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -133,7 +164,6 @@ class FeedCell: UICollectionViewCell
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "test")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

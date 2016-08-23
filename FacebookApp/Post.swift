@@ -13,7 +13,7 @@ class Post {
         self.init()
     }
     var statusText: String = "，是唐朝詩人白居易所作的長篇敘事詩，伟大的唐诗杰作，是白居易最為人傳頌的代表作。白居易把《長恨歌》歸為「感傷類」的詩歌，一般認為是描寫唐玄宗與"
-    var profileImageName = "test"
+    var profileImageName = NSUUID().uuidString
     var name = "Joe"
-    var statusImageName = "test"
+    var identifier = NSUUID().uuidString
 }

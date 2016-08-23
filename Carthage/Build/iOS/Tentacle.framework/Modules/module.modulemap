@@ -1,0 +1,10 @@
+framework module Tentacle {
+  umbrella header "Tentacle.h"
+
+  export *
+  module * { export * }
+}
+
+module Tentacle.Swift {
+    header "Tentacle-Swift.h"
+}
