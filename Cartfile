@@ -1,1 +1,3 @@
 github "rs/SDWebImage"
+github "SwiftyJSON/SwiftyJSON" "swift3"
+github "vadymmarkov/Fakery"

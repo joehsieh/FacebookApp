@@ -1,1 +1,3 @@
 github "rs/SDWebImage" "3.8.1"
+github "SwiftyJSON/SwiftyJSON" "1a9755949a652967dc2986cd7f4653496e556715"
+github "vadymmarkov/Fakery" "1.3.0"

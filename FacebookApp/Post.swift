@@ -7,13 +7,23 @@
 //
 
 import UIKit
+import Fakery
 
 class Post {
+    
+    let faker = Faker(locale: "en")
     convenience init(title:String, comment:String) {
         self.init()
     }
-    var statusText: String = "，是唐朝詩人白居易所作的長篇敘事詩，伟大的唐诗杰作，是白居易最為人傳頌的代表作。白居易把《長恨歌》歸為「感傷類」的詩歌，一般認為是描寫唐玄宗與"
-    var profileImageName = NSUUID().uuidString
-    var name = "Joe"
-    var identifier = NSUUID().uuidString
+    init() {
+        name = faker.name.firstName()
+        statusText = faker.lorem.paragraphs(amount: Int(arc4random_uniform(10)) + 1)
+        profileImageName = name
+        statusImageName = name
+    }
+    var statusText = "testStatusText"
+    var profileImageName = ""
+    var name = "testName"
+    var statusImageName = ""
+    let identifier = NSUUID().uuidString
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		530FD0771D686591003BD1D7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530FD0761D686591003BD1D7 /* Post.swift */; };
+		5313377F1D6E0EDA0064B701 /* Fakery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5313377E1D6E0EDA0064B701 /* Fakery.framework */; };
+		531337811D6E0EE60064B701 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531337801D6E0EE60064B701 /* SwiftyJSON.framework */; };
 		536EC1211D64AED2009BCF24 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 536EC1201D64AED2009BCF24 /* test.jpg */; };
 		537DB96C1D62023800E90D41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537DB96B1D62023800E90D41 /* AppDelegate.swift */; };
 		537DB96E1D62023800E90D41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537DB96D1D62023800E90D41 /* ViewController.swift */; };
@@ -30,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		530FD0761D686591003BD1D7 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		5313377E1D6E0EDA0064B701 /* Fakery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fakery.framework; path = Carthage/Build/iOS/Fakery.framework; sourceTree = "<group>"; };
+		531337801D6E0EE60064B701 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		536EC1201D64AED2009BCF24 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		537DB9681D62023700E90D41 /* FacebookApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		537DB96B1D62023800E90D41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531337811D6E0EE60064B701 /* SwiftyJSON.framework in Frameworks */,
+				5313377F1D6E0EDA0064B701 /* Fakery.framework in Frameworks */,
 				539455FA1D6B5A2E00E5CE6F /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +116,8 @@
 		539455F51D6B535500E5CE6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				531337801D6E0EE60064B701 /* SwiftyJSON.framework */,
+				5313377E1D6E0EDA0064B701 /* Fakery.framework */,
 				539455F91D6B5A2E00E5CE6F /* WebImage.framework */,
 				539455F61D6B535800E5CE6F /* Tentacle.framework */,
 			);
@@ -224,8 +232,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Fakery.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
