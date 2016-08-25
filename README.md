@@ -8,7 +8,7 @@ The basic prototype is from [letsbuildthatapp](http://videos.letsbuildthatapp.co
 
 # Feed page
 - Apply dynamic height for the cells.
-- Apply the mock data for posts.
+- Apply the mock data for the posts.
 - Use WebImage to fetch image and display it.
 - Visual format language for autolayout.
 
