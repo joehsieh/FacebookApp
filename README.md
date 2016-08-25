@@ -1,6 +1,6 @@
-ntroduction
+# Introduction
 FacebookApp is a project written in Swift for practice.
-The basic prototype is from [letsbuildthatapp](http://example.com/ "Title"). And I will apply more and more features based on it.
+The basic prototype is from [letsbuildthatapp](http://videos.letsbuildthatapp.com/playlist/Facebook-Feed/video/How-to-Create-Facebook-Feed-(Ep-1) "Title"). And I will apply more and more features based on it.
 
 # Limitation
 - Swift 3 (At least XCode8 Beta 6)
