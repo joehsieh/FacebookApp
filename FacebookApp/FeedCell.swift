@@ -124,6 +124,8 @@ class FeedCell: UICollectionViewCell
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = profileImageHeight / 2.0
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
