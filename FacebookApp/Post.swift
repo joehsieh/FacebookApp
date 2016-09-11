@@ -7,17 +7,22 @@
 //
 
 import UIKit
-import Fakery
+// TODO: Cannot build Fakery succueesfully, so jus ignore it as a workaround.
+//import Fakery
 
 class Post {
     
-    let faker = Faker(locale: "en")
+//    let faker = Faker(locale: "en")
     convenience init(title:String, comment:String) {
         self.init()
     }
     init() {
-        name = faker.name.firstName()
-        statusText = faker.lorem.paragraphs(amount: Int(arc4random_uniform(10)) + 1)
+//        name = faker.name.firstName()
+//        statusText = faker.lorem.paragraphs(amount: Int(arc4random_uniform(10)) + 1)
+//        profileImageName = name
+//        statusImageName = name
+        name = "Joe"
+        statusText = "testStatusText"
         profileImageName = name
         statusImageName = name
     }
