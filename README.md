@@ -16,6 +16,9 @@ The basic prototype is from [letsbuildthatapp](http://videos.letsbuildthatapp.co
 - WebImage: For fetching, displaying and caching the image.
 
 # TODO
+Add a blog to explain what rasterization is.
+Apply the function of showing the action menu after clicking the right-top button on the card in the FeedView. 
+
 ## Performance
-- The rounded image for the avatar, how to make the performance of showing the rouned corner images better.
+- The rounded image for the avatar, how to make the performance of showing the rouned corner images better. Here is a blog to discuss this problem.
 [What is offscreen rendering ?](https://medium.com/@ninja31312/what-is-offscreen-rendering-636df95225be#.y4egd4neh)
