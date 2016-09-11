@@ -23,11 +23,11 @@ class Post {
 //        statusImageName = name
         name = "Joe"
         statusText = "testStatusText"
-        profileImageName = name
+        avatarImageName = name
         statusImageName = name
     }
     var statusText = "testStatusText"
-    var profileImageName = ""
+    var avatarImageName = ""
     var name = "testName"
     var statusImageName = ""
     let identifier = NSUUID().uuidString

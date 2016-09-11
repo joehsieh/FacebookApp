@@ -9,16 +9,17 @@
 import UIKit
 import WebImage
 
-class FeedCell: UICollectionViewCell
+class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
 {
     static let cellIdentifier = NSStringFromClass(FeedCell.self)
     static let imageHeight: CGFloat = 200.0
-    static let profileImageHeight: CGFloat = 44.0
-    static let imageSizeSting = "\(Int(UIScreen.main.bounds.size.width))x\(Int(imageHeight))"
-    static let profileImageSizeString = "\(Int(profileImageHeight))x\(Int(profileImageHeight))"
+    static let imageRootURL = "https://source.unsplash.com/random"
+    static let avatarImageHeight: CGFloat = 44.0
+    static let imageSizeString = "\(Int(UIScreen.main.bounds.size.width))x\(Int(imageHeight))"
+    static let avatarImageSizeString = "\(Int(avatarImageHeight))x\(Int(avatarImageHeight))"
     
     static func cellHeight(withText:String, width: CGFloat, fontSize: CGFloat) -> CGFloat{
-        var height: CGFloat  = 8 + profileImageHeight + 4 + 4 + imageHeight + 8 + 24 + 8 + 0.4 + 44
+        var height: CGFloat  = 8 + avatarImageHeight + 4 + 4 + imageHeight + 8 + 24 + 8 + 0.4 + 44
         let textRect = withText.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
         height += textRect.height
         return ceil(height)
@@ -56,38 +57,33 @@ class FeedCell: UICollectionViewCell
                 statusLabel.text = statusText
             }
             
-            if let profileImagename = post?.profileImageName {
-                profileImageView.sd_setImage(with: URL(string: "https://source.unsplash.com/random/\(FeedCell.profileImageSizeString)?a=\(profileImagename)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+            if let avatarImagename = post?.avatarImageName {
+                avatarImageView.sd_setImage(with: URL(string: "\(FeedCell.imageRootURL)/\(FeedCell.avatarImageSizeString)?a=\(avatarImagename)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
                     if error != nil {
                         return
                     }
-                    let transition = CATransition()
-                    transition.duration = 0.4;
-                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                    transition.type = kCATransitionFade
-                    self.profileImageView.layer.add(transition, forKey: nil)
                 })
             }
             
             if let identifier = post?.identifier {
-                statusImageView.sd_setImage(with: URL(string: "https://source.unsplash.com/random/\(FeedCell.imageSizeSting)?a=\(identifier)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                statusImageView.sd_setImage(with: URL(string: "\(FeedCell.imageRootURL)/\(FeedCell.imageSizeString)?a=\(identifier)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
                     if error != nil {
                         return
                     }
-                    let transition = CATransition()
-                    transition.duration = 0.4;
-                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                    transition.type = kCATransitionFade
-                    self.statusImageView.layer.add(transition, forKey: nil)
                 })
             }
             
         }
     }
     
+    deinit {
+        SDWebImageManager.shared().delegate = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        SDWebImageManager.shared().delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -122,10 +118,8 @@ class FeedCell: UICollectionViewCell
         return imageView
     }()
     
-    let profileImageView: UIImageView = {
+    let avatarImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = profileImageHeight / 2.0
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -160,7 +154,7 @@ class FeedCell: UICollectionViewCell
     func setupViews() {
         backgroundColor = UIColor.white
         contentView.addSubview(nameLabel)
-        contentView.addSubview(profileImageView)
+        contentView.addSubview(avatarImageView)
         contentView.addSubview(statusLabel)
         contentView.addSubview(statusImageView)
         contentView.addSubview(likesCommentsLabel)
@@ -169,16 +163,31 @@ class FeedCell: UICollectionViewCell
         contentView.addSubview(commentButton)
         contentView.addSubview(shareButton)
         
-        addConstraintsWithFormat(format: "H:|-8-[v0(44)]-8-[v1]|", views: profileImageView, nameLabel)
+        addConstraintsWithFormat(format: "H:|-8-[v0(44)]-8-[v1]|", views: avatarImageView, nameLabel)
         addConstraintsWithFormat(format: "H:|-4-[v0]-4-|", views: statusLabel)
         addConstraintsWithFormat(format: "H:|[v0]|", views: statusImageView)
         addConstraintsWithFormat(format: "H:|-12-[v0]|", views: likesCommentsLabel)
         addConstraintsWithFormat(format: "H:|[v0(v2)][v1(v2)][v2]|", views: likeButton, commentButton, shareButton)
         addConstraintsWithFormat(format: "H:|-12-[v0]-12-|", views: dividerLineView)
         addConstraintsWithFormat(format: "V:|-12-[v0]", views: nameLabel)
-        addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]-4-[v2(200)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: profileImageView, statusLabel, statusImageView, likesCommentsLabel, dividerLineView, likeButton)
+        addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]-4-[v2(200)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: avatarImageView, statusLabel, statusImageView, likesCommentsLabel, dividerLineView, likeButton)
         addConstraintsWithFormat(format: "V:[v0(44)]|", views: commentButton)
         addConstraintsWithFormat(format: "V:[v0(44)]|", views: shareButton)
         
+    }
+    
+    // MARK: SDWebImageManagerDelegate
+    
+    func imageManager(_ imageManager: SDWebImageManager!, transformDownloadedImage image: UIImage!, with imageURL: URL!) -> UIImage! {
+        guard imageURL.absoluteString.range(of: FeedCell.avatarImageSizeString) != nil else {
+            return image
+        }
+        UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.main.scale);
+        let rect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        UIBezierPath(roundedRect: rect, cornerRadius: FeedCell.avatarImageHeight / 2).addClip()
+        image.draw(in: rect)
+        let result = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return result;
     }
 }
