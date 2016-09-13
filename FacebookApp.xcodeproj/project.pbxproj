@@ -18,6 +18,7 @@
 		537DB9811D62023800E90D41 /* FacebookAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537DB9801D62023800E90D41 /* FacebookAppTests.swift */; };
 		539455FA1D6B5A2E00E5CE6F /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539455F91D6B5A2E00E5CE6F /* WebImage.framework */; };
 		539455FC1D6CBF6900E5CE6F /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539455FB1D6CBF6900E5CE6F /* FeedCell.swift */; };
+		53E431051D885CFF00315D20 /* NJActionItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E431041D885CFF00315D20 /* NJActionItemListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		539455F61D6B535800E5CE6F /* Tentacle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tentacle.framework; path = Carthage/Build/iOS/Tentacle.framework; sourceTree = "<group>"; };
 		539455F91D6B5A2E00E5CE6F /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		539455FB1D6CBF6900E5CE6F /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		53E431041D885CFF00315D20 /* NJActionItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NJActionItemListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				537DB9771D62023800E90D41 /* Info.plist */,
 				530FD0761D686591003BD1D7 /* Post.swift */,
 				539455FB1D6CBF6900E5CE6F /* FeedCell.swift */,
+				53E431041D885CFF00315D20 /* NJActionItemListViewController.swift */,
 			);
 			path = FacebookApp;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				530FD0771D686591003BD1D7 /* Post.swift in Sources */,
 				539455FC1D6CBF6900E5CE6F /* FeedCell.swift in Sources */,
 				537DB96E1D62023800E90D41 /* ViewController.swift in Sources */,
+				53E431051D885CFF00315D20 /* NJActionItemListViewController.swift in Sources */,
 				537DB96C1D62023800E90D41 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
