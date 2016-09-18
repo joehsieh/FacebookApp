@@ -9,6 +9,10 @@
 import UIKit
 import WebImage
 
+protocol FeedCellDelegate: class {
+    func didSelectActionButton(sender: FeedCell, actionButton: UIButton)
+}
+
 class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
 {
     static let cellIdentifier = NSStringFromClass(FeedCell.self)
@@ -17,6 +21,8 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
     static let avatarImageHeight: CGFloat = 44.0
     static let imageSizeString = "\(Int(UIScreen.main.bounds.size.width))x\(Int(imageHeight))"
     static let avatarImageSizeString = "\(Int(avatarImageHeight))x\(Int(avatarImageHeight))"
+    
+    weak var delegate: FeedCellDelegate?
     
     static func cellHeight(withText:String, width: CGFloat, fontSize: CGFloat) -> CGFloat{
         var height: CGFloat  = 8 + avatarImageHeight + 4 + 4 + imageHeight + 8 + 24 + 8 + 0.4 + 44
@@ -204,6 +210,6 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
     // MARK: Private methods
     
     func clickActionButton(sender: UIButton) {
-        
+        self.delegate?.didSelectActionButton(sender: self, actionButton: sender)
     }
 }

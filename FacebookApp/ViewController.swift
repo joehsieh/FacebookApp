@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FeedCellDelegate, UIPopoverPresentationControllerDelegate {
 
     var posts = [Post]()
     
@@ -38,6 +38,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.cellIdentifier, for: indexPath) as! FeedCell
         cell.post = posts[indexPath.item]
+        cell.delegate = self
         return cell
     }
     
@@ -66,3 +67,26 @@ extension UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }
+
+extension ViewController {
+    // MARK: FeedCellDelegate
+    
+    func didSelectActionButton(sender: FeedCell, actionButton: UIButton) {
+        let vc = NJActionItemListViewController()
+        vc.modalPresentationStyle = .popover
+        let popOverPresentationController = vc.popoverPresentationController
+        popOverPresentationController?.delegate = self
+        popOverPresentationController?.permittedArrowDirections = [.up, .down]
+        popOverPresentationController?.sourceView = actionButton
+        popOverPresentationController?.sourceRect = actionButton.bounds
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    // MARK: UIPopoverPresentationControllerDelegate
+    @objc(adaptivePresentationStyleForPresentationController:) public func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle
+    {
+        return .none
+    }
+
+}
+
