@@ -9,6 +9,10 @@
 import UIKit
 import WebImage
 
+protocol FeedCellDelegate: class {
+    func didSelectActionButton(sender: FeedCell, actionButton: UIButton)
+}
+
 class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
 {
     static let cellIdentifier = NSStringFromClass(FeedCell.self)
@@ -17,6 +21,8 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
     static let avatarImageHeight: CGFloat = 44.0
     static let imageSizeString = "\(Int(UIScreen.main.bounds.size.width))x\(Int(imageHeight))"
     static let avatarImageSizeString = "\(Int(avatarImageHeight))x\(Int(avatarImageHeight))"
+    
+    weak var delegate: FeedCellDelegate?
     
     static func cellHeight(withText:String, width: CGFloat, fontSize: CGFloat) -> CGFloat{
         var height: CGFloat  = 8 + avatarImageHeight + 4 + 4 + imageHeight + 8 + 24 + 8 + 0.4 + 44
@@ -142,6 +148,12 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
     let commentButton = FeedCell.button(for: "Comment", imageName: "comment")
     let shareButton = FeedCell.button(for: "Share", imageName: "share")
     
+    let actionButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named:"downArrow"), for: .normal)
+        return button
+    }()
+    
     static func button(for title:String, imageName:String) -> UIButton{
         let button = UIButton()
         button.setTitle(title, for: .normal)
@@ -162,6 +174,8 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
         contentView.addSubview(likeButton)
         contentView.addSubview(commentButton)
         contentView.addSubview(shareButton)
+        contentView.addSubview(actionButton)
+        actionButton.addTarget(self, action: #selector(clickActionButton(sender:)), for: .touchUpInside)
         
         addConstraintsWithFormat(format: "H:|-8-[v0(44)]-8-[v1]|", views: avatarImageView, nameLabel)
         addConstraintsWithFormat(format: "H:|-4-[v0]-4-|", views: statusLabel)
@@ -173,6 +187,8 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
         addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]-4-[v2(200)]-8-[v3(24)]-8-[v4(0.4)][v5(44)]|", views: avatarImageView, statusLabel, statusImageView, likesCommentsLabel, dividerLineView, likeButton)
         addConstraintsWithFormat(format: "V:[v0(44)]|", views: commentButton)
         addConstraintsWithFormat(format: "V:[v0(44)]|", views: shareButton)
+        addConstraintsWithFormat(format: "V:|-12-[v0(44)]", views: actionButton)
+        addConstraintsWithFormat(format: "H:[v0]-12-|", views: actionButton)
         
     }
     
@@ -189,5 +205,11 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
         let result = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return result;
+    }
+    
+    // MARK: Private methods
+    
+    func clickActionButton(sender: UIButton) {
+        self.delegate?.didSelectActionButton(sender: self, actionButton: sender)
     }
 }

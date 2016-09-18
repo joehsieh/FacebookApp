@@ -11,6 +11,7 @@ The basic prototype is from [letsbuildthatapp](http://videos.letsbuildthatapp.co
 - Apply the mock data for the posts. // Build Fakery failed when using XCode 8 and Swift3, so we don't use Fakery in the transition period.
 - Use WebImage to fetch image and display it.
 - Visual format language for autolayout.
+- Show the popOver after clicking the right-top button of the FeedCell.
 
 # Carthage
 - WebImage: For fetching, displaying and caching the image.
