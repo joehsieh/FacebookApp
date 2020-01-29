@@ -1,3 +1,0 @@
-framework module Fakery {
-    header "Fakery-Swift.h"
-}

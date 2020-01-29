@@ -26,7 +26,7 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
     
     static func cellHeight(withText:String, width: CGFloat, fontSize: CGFloat) -> CGFloat{
         var height: CGFloat  = 8 + avatarImageHeight + 4 + 4 + imageHeight + 8 + 24 + 8 + 0.4 + 44
-        let textRect = withText.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
+        let textRect = withText.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil)
         height += textRect.height
         return ceil(height)
     }
@@ -40,15 +40,15 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
             
             if let name = post?.name {
                 
-                let attributedText = NSMutableAttributedString(string: name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
+                let attributedText = NSMutableAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
                 
-                attributedText.append(NSAttributedString(string: "\nDecember 18  •  San Francisco  •  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName:
+                attributedText.append(NSAttributedString(string: "\nDecember 18  •  San Francisco  •  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor:
                     UIColor.rgb(red: 155, green: 161, blue: 161)]))
                 
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.lineSpacing = 4
                 
-                attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.characters.count))
+                attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.count))
                 
                 let attachment = NSTextAttachment()
                 attachment.image = UIImage(named: "globe_small")
@@ -100,11 +100,11 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
     let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        let attributedText = NSMutableAttributedString(string: "Mark Zuckerberg", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "\nDecember 18 San Francisco", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.rgb(red: 155, green: 161, blue: 171)]))
+        let attributedText = NSMutableAttributedString(string: "Mark Zuckerberg", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "\nDecember 18 San Francisco", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 155, green: 161, blue: 171)]))
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range: NSMakeRange(0, attributedText.string.characters.count))
+        attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: NSMakeRange(0, attributedText.string.count))
         label.attributedText = attributedText
         return label
     }()
@@ -209,7 +209,7 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
     
     // MARK: Private methods
     
-    func clickActionButton(sender: UIButton) {
+    @objc func clickActionButton(sender: UIButton) {
         self.delegate?.didSelectActionButton(sender: self, actionButton: sender)
     }
 }

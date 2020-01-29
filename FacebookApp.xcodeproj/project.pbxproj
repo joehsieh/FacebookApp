@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		530FD0771D686591003BD1D7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530FD0761D686591003BD1D7 /* Post.swift */; };
-		5313377F1D6E0EDA0064B701 /* Fakery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5313377E1D6E0EDA0064B701 /* Fakery.framework */; };
-		531337811D6E0EE60064B701 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531337801D6E0EE60064B701 /* SwiftyJSON.framework */; };
 		536C57031EDDD36100B2F241 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C57021EDDD36100B2F241 /* ViewExtension.swift */; };
 		536C57071EDDD3DC00B2F241 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C57061EDDD3DC00B2F241 /* ColorExtension.swift */; };
 		536EC1211D64AED2009BCF24 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 536EC1201D64AED2009BCF24 /* test.jpg */; };
@@ -60,8 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				531337811D6E0EE60064B701 /* SwiftyJSON.framework in Frameworks */,
-				5313377F1D6E0EDA0064B701 /* Fakery.framework in Frameworks */,
 				539455FA1D6B5A2E00E5CE6F /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +195,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -241,15 +238,13 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Fakery.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -402,7 +397,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.FacebookApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -419,7 +414,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.FacebookApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
