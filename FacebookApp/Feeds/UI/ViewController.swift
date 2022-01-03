@@ -10,7 +10,16 @@ import UIKit
 
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIPopoverPresentationControllerDelegate {
 
-    var posts = [Post]()
+    let viewModel: FeedViewModel
+    
+    init(postRepository: PostRepositoryInterface) {
+        viewModel = FeedViewModel(postRepository: postRepository)
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +28,6 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.cellIdentifier)
         collectionView?.backgroundColor = UIColor.lightGray
         collectionView?.alwaysBounceVertical = true
-        for _ in 0 ..< 100 {
-            posts.append(Post())
-        }
-        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -32,18 +37,18 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return posts.count
+        return viewModel.posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.cellIdentifier, for: indexPath) as! FeedCell
-        cell.post = posts[indexPath.item]
+        cell.post = viewModel.posts[indexPath.item]
         cell.delegate = self
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let post = posts[indexPath.item]
+        let post = viewModel.posts[indexPath.item]
         let height = FeedCell.cellHeight(withText: post.statusText, width: self.view.frame.size.width, fontSize: 14)
         return CGSize(width: view.frame.width, height: height)
     }
