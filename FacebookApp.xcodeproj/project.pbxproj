@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,9 @@
 		539455FC1D6CBF6900E5CE6F /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539455FB1D6CBF6900E5CE6F /* FeedCell.swift */; };
 		53BE5F3D2782172300FE048F /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BE5F3C2782172300FE048F /* PostRepository.swift */; };
 		53BE5F442782185E00FE048F /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BE5F432782185E00FE048F /* FeedViewModel.swift */; };
+		53BE5F472783107000FE048F /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 53BE5F462783107000FE048F /* FacebookCore */; };
+		53BE5F492783107000FE048F /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 53BE5F482783107000FE048F /* FacebookLogin */; };
+		53BE5F4B2783107000FE048F /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 53BE5F4A2783107000FE048F /* FacebookShare */; };
 		53E431051D885CFF00315D20 /* NJActionItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E431041D885CFF00315D20 /* NJActionItemListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				539455FA1D6B5A2E00E5CE6F /* WebImage.framework in Frameworks */,
+				53BE5F472783107000FE048F /* FacebookCore in Frameworks */,
+				53BE5F4B2783107000FE048F /* FacebookShare in Frameworks */,
+				53BE5F492783107000FE048F /* FacebookLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +198,11 @@
 			dependencies = (
 			);
 			name = FacebookApp;
+			packageProductDependencies = (
+				53BE5F462783107000FE048F /* FacebookCore */,
+				53BE5F482783107000FE048F /* FacebookLogin */,
+				53BE5F4A2783107000FE048F /* FacebookShare */,
+			);
 			productName = FacebookApp;
 			productReference = 537DB9681D62023700E90D41 /* FacebookApp.app */;
 			productType = "com.apple.product-type.application";
@@ -246,6 +257,9 @@
 				Base,
 			);
 			mainGroup = 537DB95F1D62023600E90D41;
+			packageReferences = (
+				53BE5F452783107000FE048F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = 537DB9691D62023700E90D41 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -427,7 +441,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -442,7 +457,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FacebookApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.FacebookApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -459,7 +477,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FacebookApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.FacebookApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -471,7 +492,11 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = FacebookAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.FacebookAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -484,7 +509,11 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = FacebookAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.FacebookAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -523,6 +552,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		53BE5F452783107000FE048F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		53BE5F462783107000FE048F /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53BE5F452783107000FE048F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		53BE5F482783107000FE048F /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53BE5F452783107000FE048F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		53BE5F4A2783107000FE048F /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53BE5F452783107000FE048F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 537DB9601D62023600E90D41 /* Project object */;
 }
