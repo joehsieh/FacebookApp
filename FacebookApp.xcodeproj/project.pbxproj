@@ -23,6 +23,8 @@
 		53BE5F472783107000FE048F /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 53BE5F462783107000FE048F /* FacebookCore */; };
 		53BE5F492783107000FE048F /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 53BE5F482783107000FE048F /* FacebookLogin */; };
 		53BE5F4B2783107000FE048F /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 53BE5F4A2783107000FE048F /* FacebookShare */; };
+		53C6048D2785E3AA000F449E /* NJImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C6048C2785E3AA000F449E /* NJImageCache.swift */; };
+		53C6048F2785F05B000F449E /* NJImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C6048E2785F05B000F449E /* NJImageLoader.swift */; };
 		53E431051D885CFF00315D20 /* NJActionItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E431041D885CFF00315D20 /* NJActionItemListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		539455FB1D6CBF6900E5CE6F /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		53BE5F3C2782172300FE048F /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		53BE5F432782185E00FE048F /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		53C6048C2785E3AA000F449E /* NJImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NJImageCache.swift; sourceTree = "<group>"; };
+		53C6048E2785F05B000F449E /* NJImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NJImageLoader.swift; sourceTree = "<group>"; };
 		53E431041D885CFF00315D20 /* NJActionItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NJActionItemListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +108,7 @@
 		537DB96A1D62023700E90D41 /* FacebookApp */ = {
 			isa = PBXGroup;
 			children = (
+				53C6048B2785E38A000F449E /* ImageUtilities */,
 				53BE5F422782183C00FE048F /* Extensions */,
 				53BE5F412782182D00FE048F /* Repositories */,
 				53BE5F3F2782180200FE048F /* Feeds */,
@@ -179,6 +184,15 @@
 				536C57061EDDD3DC00B2F241 /* ColorExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		53C6048B2785E38A000F449E /* ImageUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				53C6048C2785E3AA000F449E /* NJImageCache.swift */,
+				53C6048E2785F05B000F449E /* NJImageLoader.swift */,
+			);
+			path = ImageUtilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,10 +329,12 @@
 			files = (
 				536C57031EDDD36100B2F241 /* ViewExtension.swift in Sources */,
 				530FD0771D686591003BD1D7 /* Post.swift in Sources */,
+				53C6048D2785E3AA000F449E /* NJImageCache.swift in Sources */,
 				539455FC1D6CBF6900E5CE6F /* FeedCell.swift in Sources */,
 				536C57071EDDD3DC00B2F241 /* ColorExtension.swift in Sources */,
 				537DB96E1D62023800E90D41 /* ViewController.swift in Sources */,
 				53BE5F3D2782172300FE048F /* PostRepository.swift in Sources */,
+				53C6048F2785F05B000F449E /* NJImageLoader.swift in Sources */,
 				53E431051D885CFF00315D20 /* NJActionItemListViewController.swift in Sources */,
 				537DB96C1D62023800E90D41 /* AppDelegate.swift in Sources */,
 				53BE5F442782185E00FE048F /* FeedViewModel.swift in Sources */,
@@ -395,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -438,7 +454,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

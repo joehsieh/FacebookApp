@@ -15,6 +15,8 @@ protocol FeedCellDelegate: class {
 
 class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
 {
+    private let imageLoader = NJImageLoader()
+    
     static let cellIdentifier = NSStringFromClass(FeedCell.self)
     static let imageHeight: CGFloat = 200.0
     static let imageRootURL = "https://source.unsplash.com/random"
@@ -64,19 +66,30 @@ class FeedCell: UICollectionViewCell, SDWebImageManagerDelegate
             }
             
             if let avatarImagename = post?.avatarImageName {
-                avatarImageView.sd_setImage(with: URL(string: "\(FeedCell.imageRootURL)/\(FeedCell.avatarImageSizeString)?a=\(avatarImagename)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
-                    if error != nil {
-                        return
-                    }
-                })
+                imageLoader.loadImage(from: URL(string: "\(FeedCell.imageRootURL)/\(FeedCell.avatarImageSizeString)?a=\(avatarImagename)")!).sink { [self] image in
+                    guard let image = image else { return }
+                    self.avatarImageView.image = image
+                }
+//                avatarImageView.sd_setImage(with: URL(string: "\(FeedCell.imageRootURL)/\(FeedCell.avatarImageSizeString)?a=\(avatarImagename)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+//                    if error != nil {
+//                        return
+//                    }
+//                })
             }
             
             if let identifier = post?.identifier {
-                statusImageView.sd_setImage(with: URL(string: "\(FeedCell.imageRootURL)/\(FeedCell.imageSizeString)?a=\(identifier)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
-                    if error != nil {
+                imageLoader.loadImage(from: URL(string: "\(FeedCell.imageRootURL)/\(FeedCell.imageSizeString)?a=\(identifier)")!).sink { [self] image in
+                    guard let image = image else {
+                        self.statusImageView.image = UIImage(named:"placeholder")
                         return
                     }
-                })
+                    self.statusImageView.image = image
+                }
+//                statusImageView.sd_setImage(with: URL(string: "\(FeedCell.imageRootURL)/\(FeedCell.imageSizeString)?a=\(identifier)"), placeholderImage: UIImage(named:"placeholder"), options: .retryFailed, completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+//                    if error != nil {
+//                        return
+//                    }
+//                })
             }
             
         }
