@@ -26,7 +26,7 @@ final class NJImageCache {
         static let defaultConfig = Config(countLimit: 100, memoryLimit: 100 * 1024 * 1024)
     }
     
-    private let lock = NSLock()
+    private let queue = DispatchQueue.global(qos: .userInitiated)
 
     private let config: Config
     
@@ -55,38 +55,38 @@ extension NJImageCache: NJImageCacheProtocol {
             return
         }
         let decodedImage = image.decodedImage()
-        lock.lock()
-        defer { lock.unlock() }
-        imageCache.setObject(image, forKey: url as AnyObject)
-        decodedImageCache.setObject(decodedImage, forKey: url as AnyObject)
+        queue.sync(flags: .barrier) {
+            imageCache.setObject(image, forKey: url as AnyObject)
+            decodedImageCache.setObject(decodedImage, forKey: url as AnyObject)
+        }
     }
     
     func image(for url: URL) -> UIImage? {
-        lock.lock()
-        defer { lock.unlock() }
-        if let decodedImage = decodedImageCache.object(forKey: url as AnyObject) as? UIImage {
-            return decodedImage
+        queue.sync {
+            if let decodedImage = decodedImageCache.object(forKey: url as AnyObject) as? UIImage {
+                return decodedImage
+            }
+            if let image = imageCache.object(forKey: url as AnyObject) as? UIImage {
+                let decodedImage = image.decodedImage()
+                decodedImageCache.setObject(decodedImage, forKey: url as AnyObject)
+                return decodedImage
+            }
+            return nil
         }
-        if let image = imageCache.object(forKey: url as AnyObject) as? UIImage {
-            let decodedImage = image.decodedImage()
-            decodedImageCache.setObject(decodedImage, forKey: url as AnyObject)
-            return decodedImage
-        }
-        return nil
     }
     
     func removeImage(for url: URL) {
-        lock.lock()
-        defer { lock.unlock() }
-        imageCache.removeObject(forKey: url as AnyObject)
-        decodedImageCache.removeObject(forKey: url as AnyObject)
+        queue.sync(flags: .barrier) {
+            imageCache.removeObject(forKey: url as AnyObject)
+            decodedImageCache.removeObject(forKey: url as AnyObject)
+        }
     }
     
     func removeAllImages() {
-        lock.lock()
-        defer { lock.unlock() }
-        imageCache.removeAllObjects()
-        decodedImageCache.removeAllObjects()
+        queue.sync(flags: .barrier) {
+            imageCache.removeAllObjects()
+            decodedImageCache.removeAllObjects()
+        }
     }
     
     subscript(url: URL) -> UIImage? {
